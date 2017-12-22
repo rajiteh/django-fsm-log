@@ -15,7 +15,10 @@ def fsm_log_by(func):
             instance.by = kwargs['by'] # legacy
             
         out = func(instance, *arg_list, **kwargs)
-
+        
+        if kwargs.get('by', False):
+            delattr(instance, 'by')
+            
         meta_by.remove()
 
         return out
@@ -26,7 +29,7 @@ def fsm_log_by(func):
 def fsm_log_description(func=None, allow_inline=False):
     if func is None:
         return partial(fsm_log_description, allow_inline=allow_inline)
-    
+
     @wraps(func)
     def wrapped(*args, **kwargs):
         arg_list = list(args)

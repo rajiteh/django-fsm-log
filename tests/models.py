@@ -27,7 +27,7 @@ class Article(models.Model):
     def request_changes(self, by=None):
         pass
 
-    @fsm_log_by
+    @fsm_log_by 
     @transition(field=state, source='submitted', target='published')
     def publish(self, by=None):
         pass
