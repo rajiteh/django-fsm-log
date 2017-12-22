@@ -11,7 +11,7 @@ setup(
     url='https://github.com/gizmag/django-fsm-log',
     license='MIT',
     packages=find_packages(),
-    install_requires=['django>=1.8', 'django_fsm>=2', 'django_appconf'],
+    install_requires=['django>=1.8', 'django_fsm>=2', 'django_appconf', 'funcsigs;python_version<"3"'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
