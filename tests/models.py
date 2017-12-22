@@ -16,8 +16,8 @@ class Article(models.Model):
 
     state = FSMField(choices=STATES, default='draft', protected=True)
 
-    @fsm_log_description
     @fsm_log_by
+    @fsm_log_description
     @transition(field=state, source='draft', target='submitted')
     def submit(self, description=None, by=None):
         pass
@@ -37,10 +37,10 @@ class Article(models.Model):
     def delete(self, using=None):
         pass
 
-    @fsm_log_description(allow_inline=True)
     @fsm_log_by
+    @fsm_log_description(allow_inline=True)
     @transition(field=state, source='draft', target='submitted')
-    def submit_mutates_description(self, change_to, description):
+    def submit_inline_description_change(self, change_to, description):
         description.set(change_to)
         
 

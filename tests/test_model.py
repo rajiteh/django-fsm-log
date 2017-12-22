@@ -6,11 +6,11 @@ from .models import Article, ArticleInteger
 
 
 def test_get_available_state_transitions(article):
-    assert len(list(article.get_available_state_transitions())) == 4
+    assert len(list(article.get_available_state_transitions())) == 3
 
 
 def test_get_all_state_transitions(article):
-    assert len(list(article.get_all_state_transitions())) == 6
+    assert len(list(article.get_all_state_transitions())) == 5
 
 
 def test_log_created_on_transition(article):
@@ -62,15 +62,7 @@ def test_description_is_none_when_not_set_in_transition(article):
 
 def test_description_can_be_mutated_by_the_transition(article):
     description = "Sed egestas dui"
-    article.submit_mutates_description(change_to=description)
-
-    log = StateLog.objects.all()[0]
-    assert description == log.description
-
-
-def test_description_is_set_when_not_defined_by_the_transition(article):
-    description = "Sed egestas dui"
-    article.submit_no_description_param(description=description)
+    article.submit_inline_description_change(change_to=description)
 
     log = StateLog.objects.all()[0]
     assert description == log.description
